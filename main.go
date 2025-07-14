@@ -23,4 +23,8 @@ func main() {
 	contaExemplo.Depositar(100)
 	fmt.Println("Saldo:", contaExemplo.ObterSaldo())
 
+	contaDoDenis := contas.ContaPoupanca{}
+	contaDoDenis.Depositar(100)
+	contaDoDenis.Sacar(55)
+	fmt.Println("Saldo:", contaDoDenis.ObterSaldo())
 }
