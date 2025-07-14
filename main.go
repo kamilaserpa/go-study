@@ -9,42 +9,24 @@ type ContaCorrente struct {
 	saldo         float64
 }
 
+func (c *ContaCorrente) Sacar(valorDoSaque float64) string {
+	podeSacar := valorDoSaque <= c.saldo && valorDoSaque > 00
+	if podeSacar {
+		c.saldo -= valorDoSaque
+		return "Saque realizado com sucesso."
+	} else {
+		return "Saldo insuficiente."
+	}
+}
+
 func main() {
-	// Atribuição curta
-	contaDaEugenia := ContaCorrente{
-		titular:       "Eugênia",
-		numeroAgencia: 589,
-		numeroConta:   123456,
-		saldo:         125.6}
-	fmt.Println(contaDaEugenia)
+	contaDaSilvia := ContaCorrente{}
+	contaDaSilvia.titular = "Silvia"
+	contaDaSilvia.saldo = 500
 
-	contaDaMaria := ContaCorrente{"Maria", 389, 234567, 147.5}
-	fmt.Println(contaDaMaria)
+	fmt.Println(contaDaSilvia.saldo)
 
-	// Definindo apenas alguns parâmetros. O Go atribui um valor default inicial para as propriedades não definidas
-	contaDaBruna := ContaCorrente{titular: "Bruna", saldo: 275.5}
-	fmt.Println(contaDaBruna)
-	contaDaBruna2 := ContaCorrente{titular: "Bruna", saldo: 275.5}
-	fmt.Println(contaDaBruna2)
-	fmt.Println("True, pois avalia os conteúdos, contaDaBruna == contaDaBruna2:")
-	fmt.Println(contaDaBruna == contaDaBruna2)
-
-	var contaDaPaula *ContaCorrente
-	contaDaPaula = new(ContaCorrente)
-	contaDaPaula.titular = "Paula"
-	contaDaPaula.saldo = 500
-	fmt.Println(contaDaPaula)
-
-	var contaDaPaula2 *ContaCorrente
-	contaDaPaula2 = new(ContaCorrente)
-	contaDaPaula2.titular = "Paula"
-	contaDaPaula2.saldo = 500
-	fmt.Println(contaDaPaula2)
-
-	fmt.Println("False, pois avalia os endereços, contaDaPaula == contaDaPaula2:")
-	fmt.Println(contaDaPaula == contaDaPaula2) // False, pois avalia os valores
-
-	fmt.Println("True, pois avalia os conteúdos, *contaDaPaula == *contaDaPaula2:")
-	fmt.Println(*contaDaPaula == *contaDaPaula2) // True, pois avalia os conteúdos
+	fmt.Println(contaDaSilvia.Sacar(400.))
+	fmt.Println(contaDaSilvia.saldo)
 
 }
