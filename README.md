@@ -59,6 +59,17 @@ A palavra-chave type é usada para definir um novo tipo em Go. Ela serve como ba
  var x NumeroDaConta = 12340 // NumeroDaConta é uma nova variável baseada no tipo int.
 ```
 
+#### Mod
+É necessário executar o comando `go mod init` na pasta onde está o arquivo `main.go`.
+Ao fazer isso estamos inicializando um módulo Go na pasta onde está o arquivo main.go. Isso cria o arquivo go.mod, que declara a pasta do projeto como um módulo.
+
+Essa ação é necessária para que a aplicação Go possa reconhecer os pacotes dentro desse módulo como pacotes válidos e importá-los com sucesso.
+
+#### Visibilidade
+Em Go, a visibilidade é determinada pela primeira letra do nome de um identificador. Se a primeira letra for maiúscula, o identificador é exportado, funciona como um "public" o que significa que ele pode ser acessado de outros pacotes. Se a primeira letra for minúscula, o identificador é não exportado, e só pode ser acessado dentro do mesmo pacote.
+
+Por isso as propriedades da [ContaCorrente](contas/contaCorrente.go) estão em maiúsculo, para que possam ser acessadas em main.go.
+
 ### Struct
 `struct` é uma estrutura de dados composta usada para agrupar diferentes campos sob um mesmo tipo. Sintaxe geral:
 ```go
