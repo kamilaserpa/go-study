@@ -3,6 +3,26 @@
 Documentação: https://go.dev/ref/spec </br>
 Go playground: https://go.dev/play/
 
+- [GO lang: Orientação a. Objetos](#go-lang-orientação-a-objetos)
+    - [Variáveis](#variáveis)
+      - [Declaração curta `:=`](#declaração-curta-)
+      - [Ponteiro x Cópia](#ponteiro-x-cópia)
+      - [Inicialização zero e nil](#inicialização-zero-e-nil)
+    - [Type](#type)
+      - [Mod](#mod)
+      - [Visibilidade](#visibilidade)
+    - [Struct](#struct)
+      - [Formas de inicializar uma struct:](#formas-de-inicializar-uma-struct)
+    - [Funções](#funções)
+      - [Função anônima](#função-anônima)
+      - [Função variádica (número variável de argumentos)](#função-variádica-número-variável-de-argumentos)
+      - [Função como valor (funções de ordem superior)](#função-como-valor-funções-de-ordem-superior)
+      - [Métodos](#métodos)
+    - [Composição](#composição)
+
+
+### Variáveis
+
 #### Declaração curta `:=`
 O `:=` é chamado de declaração curta (short variable declaration), e ele:
  - Declara uma nova variável
@@ -10,6 +30,37 @@ O `:=` é chamado de declaração curta (short variable declaration), e ele:
  - Deduz automaticamente o tipo
 Você não pode usar := fora de funções, como no escopo global.
 O `=` indica apenas atribuição (variável já existe): `x = 20`
+
+#### Ponteiro x Cópia
+Utilizando o *, por exemplo `(p *Pessoa)` nos referimos a um ponteiro para a instância criada da estrutura Pessoa. Nesse caso, passamos para o método o valor encontrado neste ponteiro através do (p *Pessoa).
+```go
+func (p *Pessoa) ExibirNomeCompleto() string {
+    nomeCompleto := p.nome + " " + p.sobrenome
+    return nomeCompleto
+}
+
+func main() {
+    p1 := Pessoa{"Guilherme", "Lima"}
+    fmt.Println(p1.ExibirNomeCompleto()) // Recebemos o nome "Guilherme Lima" pois passamos o valor contino no ponteiro e a função é capaz de alterá-lo
+}
+```
+
+A seguir passamos uma cópia do objketo Pessoa `(p Pessoa)`, assim a função não altera o valor do ponteiro pois trabalha com uma cópia do objeto, as alterações não serão refletidas na fonte.
+```go
+
+func (p Pessoa) ExibirNomeCompleto() string {
+    p.sobrenome = "Silva"
+    nomeCompleto := p.nome + " " + p.sobrenome
+    return nomeCompleto
+}
+
+func main() {
+    p1 := Pessoa{"Guilherme", "Lima"}
+
+    fmt.Println(p1.ExibirNomeCompleto()) // Guilherme Silva
+    fmt.Println(p1.nome, p1.sobrenome) // "Guilherme Lima, continua Lima pois a funcao não foi capaz de alterar o valor real do ponteiro
+}
+```
 
 #### Inicialização zero e nil
 
@@ -246,3 +297,27 @@ func (p Pessoa) Saudacao() string {
 }
 ```
 
+### Composição
+
+![alt text](image-composicao.png)
+
+Composição no Go é usado no lugar de herança, já que Go não tem herança clássica como em linguagens orientadas a objetos tradicionais.
+
+Em Go, composição significa que um tipo pode incluir outros tipos dentro dele — e com isso herdar seu comportamento (métodos e campos) por delegação.
+```go
+type Animal struct{}
+
+func (a Animal) Respirar() {
+    fmt.Println("Respirando...")
+}
+
+type Cachorro struct {
+    Animal // composição
+    Nome string
+}
+// Uso
+func main() {
+    c := Cachorro{Nome: "Bolt"}
+    c.Respirar() // método herdado via composição
+}
+```
