@@ -1,9 +1,15 @@
 # GO lang: Orientação a. Objetos
 
-Documentação: https://go.dev/ref/spec </br>
-Go playground: https://go.dev/play/
+Documentação: https://go.dev/ref/spec . </br>
+Go playground: https://go.dev/play/ .</br>
+Para executar localmente utilizamos o comando `go run main.go` na pasta onde se encontra o arquivo `main.go`.
+
+<img src="image-logo-alura-go.png" alt="Imagem do Gopher e texto Alura no topo" width="150"/>
+
+## Curso - Go: Orientação a Objetos
 
 - [GO lang: Orientação a. Objetos](#go-lang-orientação-a-objetos)
+  - [Curso - Go: Orientação a Objetos](#curso---go-orientação-a-objetos)
     - [Variáveis](#variáveis)
       - [Declaração curta `:=`](#declaração-curta-)
       - [Ponteiro x Cópia](#ponteiro-x-cópia)
@@ -19,6 +25,8 @@ Go playground: https://go.dev/play/
       - [Função como valor (funções de ordem superior)](#função-como-valor-funções-de-ordem-superior)
       - [Métodos](#métodos)
     - [Composição](#composição)
+    - [Interface](#interface)
+    - [Datas](#datas)
 
 
 ### Variáveis
@@ -320,4 +328,90 @@ func main() {
     c := Cachorro{Nome: "Bolt"}
     c.Respirar() // método herdado via composição
 }
+```
+
+### Interface
+
+Uma interface em Go define um conjunto de métodos que um tipo precisa implementar, sem definir como eles são implementados.
+
+Go não usa `implements` como em Java. A implementação é implícita — se o tipo tem os métodos exigidos, ele já implementa a interface.
+
+```go
+type Conta interface {
+	Sacar(valor float64) string
+}
+func PagarBoleto(conta Conta, valorDoBoleto float64) {
+	conta.Sacar(valorDoBoleto)
+}
+
+type ContaCorrente struct {}
+// ContaCorrente implementa a interface Conta, pois tem um método com a mesma identificação e mesma assinatura (Sacar)
+func (c *ContaCorrente) Sacar(valorDoSaque float64) string {
+	...
+}
+
+func main() {
+    c := ContaCorrente{}
+    PagarBoleto(c) 
+}
+```
+
+### Datas
+Para a formatação de datas com Golang [artigo](https://www.alura.com.br/artigos/golang-trabalhando-com-datas) é utilizada uma data de exemplo fixa que serve como modelo e segue uma tabela de valores.
+
+| O que queremos editar             | Código |
+|----------------------------------|--------|
+| dia (com zero)                   | 02     |
+| dia (sem o zero)                 | 2      |
+| dia da semana (inteiro)          | Monday |
+| dia da semana abreviado          | Mon    |
+| mês com número (com zero)        | 01     |
+| mês com número (sem zero)        | 1      |
+| mês (nome inteiro)               | January|
+| mês (nome abreviado)             | Jan    |
+| ano (inteiro)                    | 2006   |
+| ano (abreviado)                  | 06     |
+| hora (com zero)                  | 03     |
+| hora (sem zero)                  | 3      |
+| hora (formato 24 horas)          | 15     |
+| minutos (com zero)               | 04     |
+| minutos (sem zero)               | 4      |
+| segundos (com zero)              | 05     |
+| segundos (sem zero)              | 5      |
+
+
+```go
+package main
+import (
+    "fmt"
+    "time"
+)
+func main() {
+    data := time.Now()
+    fmt.Println(data.Format(("02/Jan/2006 15:04:05 ")))
+}
+```
+
+Exemplos:
+
+```go
+2006-01-02
+20060102
+January 02, 2006
+02 January 2006
+02-Jan-2006
+02/01/2006
+02/01/06
+010206
+Jan-02-06
+Jan-02-2006
+06
+Mon
+Monday
+Jan-06
+02-01-2006
+2006-01-02
+02/01/2006 15:04
+02/01/2006 03:04 PM
+Mon, 02 Jan 2006
 ```

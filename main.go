@@ -5,11 +5,11 @@ import (
 	"fmt"
 )
 
-func PagarBoleto(conta verificarConta, valorDoBoleto float64) {
+func PagarBoleto(conta Conta, valorDoBoleto float64) {
 	conta.Sacar(valorDoBoleto)
 }
 
-type verificarConta interface {
+type Conta interface {
 	Sacar(valor float64) string
 }
 
