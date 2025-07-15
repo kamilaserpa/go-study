@@ -4,7 +4,7 @@ Documentação: https://go.dev/ref/spec . </br>
 Go playground: https://go.dev/play/ .</br>
 Para executar localmente utilizamos o comando `go run main.go` na pasta onde se encontra o arquivo `main.go`.
 
-<img src="assets/image-logo-alura-go.png" alt="Imagem do Gopher e texto Alura no topo" width="150"/>
+<img src="curso-1-orientacao-objeto/assets/image-logo-alura-go.png" alt="Imagem do Gopher e texto Alura no topo" width="150"/>
 
 ## Curso 1 - Go: Orientação a Objetos
 
@@ -99,7 +99,7 @@ func main() {
     var f float64
     var i int 
 
-    fmt.Println(f==i)
+    fmt.Println(f==i) // Error
 }
 ```
 
@@ -221,6 +221,10 @@ func main() {
 ```
 
 Uma função pode ter um, muitos ou nenhum parâmetro:
+
+<details>
+<summary>Exemplos de funções passando número variável de parâmetros</summary>
+
 ```go
     func SemParametro() string {
         return "Exemplo de função sem parâmetro!"
@@ -240,6 +244,7 @@ Uma função pode ter um, muitos ou nenhum parâmetro:
         fmt.Println(DoisParametros("Passando dois parâmetros: essa string e o número", 10))
     }
 ```
+</details>
 
 #### Função anônima
 Útil para funções inline ou passar como argumento.
@@ -307,7 +312,7 @@ func (p Pessoa) Saudacao() string {
 
 ### Composição
 
-![alt text](assets/image-composicao.png)
+![Exemplode de composição](curso-1-orientacao-objeto/assets/image-composicao.png)
 
 Composição no Go é usado no lugar de herança, já que Go não tem herança clássica como em linguagens orientadas a objetos tradicionais.
 
@@ -359,6 +364,9 @@ func main() {
 ### Datas
 Para a formatação de datas com Golang [artigo](https://www.alura.com.br/artigos/golang-trabalhando-com-datas) é utilizada uma data de exemplo fixa que serve como modelo e segue uma tabela de valores.
 
+<details>
+<summary>Tabela de valores de referência de data e hora</summary>
+
 | O que queremos editar             | Código |
 |----------------------------------|--------|
 | dia (com zero)                   | 02     |
@@ -378,7 +386,7 @@ Para a formatação de datas com Golang [artigo](https://www.alura.com.br/artigo
 | minutos (sem zero)               | 4      |
 | segundos (com zero)              | 05     |
 | segundos (sem zero)              | 5      |
-
+</details>
 
 ```go
 package main
