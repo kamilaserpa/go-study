@@ -1,7 +1,7 @@
 package main
 
 import (
-	"banco/contas"
+	"alura/curso-1-orientacao-objeto/contas"
 	"fmt"
 )
 

@@ -30,6 +30,8 @@ go.work.sum
 # Editor/IDE
 .idea/
 .vscode/
+*.idea/
+*.vscode/
 
 # Default ignored files
 /shelf/

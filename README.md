@@ -1,15 +1,15 @@
-# GO lang: Orientação a. Objetos
+# GO lang
 
 Documentação: https://go.dev/ref/spec . </br>
 Go playground: https://go.dev/play/ .</br>
 Para executar localmente utilizamos o comando `go run main.go` na pasta onde se encontra o arquivo `main.go`.
 
-<img src="image-logo-alura-go.png" alt="Imagem do Gopher e texto Alura no topo" width="150"/>
+<img src="assets/image-logo-alura-go.png" alt="Imagem do Gopher e texto Alura no topo" width="150"/>
 
-## Curso - Go: Orientação a Objetos
+## Curso 1 - Go: Orientação a Objetos
 
-- [GO lang: Orientação a. Objetos](#go-lang-orientação-a-objetos)
-  - [Curso - Go: Orientação a Objetos](#curso---go-orientação-a-objetos)
+- [GO lang](#go-lang)
+  - [Curso 1 - Go: Orientação a Objetos](#curso-1---go-orientação-a-objetos)
     - [Variáveis](#variáveis)
       - [Declaração curta `:=`](#declaração-curta-)
       - [Ponteiro x Cópia](#ponteiro-x-cópia)
@@ -127,7 +127,7 @@ Essa ação é necessária para que a aplicação Go possa reconhecer os pacotes
 #### Visibilidade
 Em Go, a visibilidade é determinada pela primeira letra do nome de um identificador. Se a primeira letra for maiúscula, o identificador é exportado, funciona como um "public" o que significa que ele pode ser acessado de outros pacotes. Se a primeira letra for minúscula, o identificador é não exportado, e só pode ser acessado dentro do mesmo pacote.
 
-Por isso as propriedades da [ContaCorrente](contas/contaCorrente.go) estão em maiúsculo, para que possam ser acessadas em main.go.
+Por isso as propriedades da [ContaCorrente](curso-1-orientacao-objeto/contas/contaCorrente.go) estão em maiúsculo, para que possam ser acessadas em main.go.
 
 ### Struct
 `struct` é uma estrutura de dados composta usada para agrupar diferentes campos sob um mesmo tipo. Sintaxe geral:
@@ -307,7 +307,7 @@ func (p Pessoa) Saudacao() string {
 
 ### Composição
 
-![alt text](image-composicao.png)
+![alt text](assets/image-composicao.png)
 
 Composição no Go é usado no lugar de herança, já que Go não tem herança clássica como em linguagens orientadas a objetos tradicionais.
 

@@ -1,6 +1,6 @@
 package contas
 
-import "banco/clientes"
+import "alura/curso-1-orientacao-objeto/clientes"
 
 type ContaCorrente struct {
 	Titular                    clientes.Titular
