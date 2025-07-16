@@ -27,6 +27,7 @@ Para executar localmente utilizamos o comando `go run main.go` na pasta onde se 
     - [Composição](#composição)
     - [Interface](#interface)
     - [Datas](#datas)
+  - [Curso 2 - Go: Aplicação Web](#curso-2---go-aplicação-web)
 
 
 ### Variáveis
@@ -423,3 +424,36 @@ Jan-06
 02/01/2006 03:04 PM
 Mon, 02 Jan 2006
 ```
+
+## Curso 2 - Go: Aplicação Web
+
+Para criar o servidor e conseguir exibir uma página html, no arquivo `main.go` foram utilizadas as funções HandleFunc e ListenAndServe do pacote `net/http`.
+No arquivo `index.html`foi definido entre 2 chaves {{ }} a referência passada na função `ExecuteTemplate` ([main.go](curso-2-aplicacao-web/main.go)).
+
+Criamos um banco de dados Postgresql local e com o PgAdmin criamos as tabelas.
+
+<details>
+<summary>SQL de criacao da tabela produtos e inserção de dados</summary>
+
+```sql
+create table produtos (	
+	id serial primary key,
+	nome varchar,
+	descricao varchar,
+	preco decimal,
+	quantidade integer
+)
+insert into produtos (nome, descricao, preco, quantidade) values
+('Camiseta', 'Preta', 19, 10),
+('Fone de ouvido', 'Bluetooth', 99, 5);
+```
+</details>
+
+Para conectar com o banco de dados acessamos o site `https://godoc.org/`, pesquisamos "postgres" e encontramos a biblioteca de integração com postgres `pq` (https://pkg.go.dev/github.com/lib/pq). Instalamos seguindo os comandos da documantação e adicionamos os dados da conexão em [main.go](curso-2-aplicacao-web/main.go):
+
+```shell
+go mod init
+go mod tidy
+go get github.com/lib/pq
+````
+
