@@ -12,3 +12,7 @@ func HandlerIndex(w http.ResponseWriter, r *http.Request) {
 	todosOsProdutos := models.BuscaTodosOsProdutos()
 	templates.ExecuteTemplate(w, "Index", todosOsProdutos)
 }
+
+func HandlerProdutoNovo(w http.ResponseWriter, r *http.Request) {
+	templates.ExecuteTemplate(w, "ProdutoNovo", nil)
+}
