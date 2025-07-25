@@ -26,6 +26,7 @@
                             <th>Descrição</th>
                             <th>Preço</th>
                             <th>Quantidade</th>
+                            <th>Ação</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -35,6 +36,12 @@
                             <td>{{.Descricao}}</td>
                             <td>{{.Preco}}</td>
                             <td>{{.Quantidade}}</td>
+                            <!-- <td>
+                                <a href="/delete-produto-db?id={{.Id}}" class="btn btn-danger btn-sm">Excluir</a>
+                            </td> -->
+                            <td>
+                                <button onClick="onDelete('{{.Id}}')" class="btn btn-danger btn-sm">Deletar</button>
+                            </td>
                         </tr>
                         {{end}}
                     </tbody>
@@ -47,6 +54,15 @@
         </div>
     </div>
 </body>
+
+<script>
+    function onDelete(id) {
+        let confirmaDelecao = confirm("Tem certeza que deseja excluir este produto?")
+        if (confirmaDelecao) {
+            window.location = "/delete-produto-db?id=" + id;
+        }
+    }
+</script>
 
 </html>
 {{end}}

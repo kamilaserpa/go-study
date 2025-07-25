@@ -35,6 +35,7 @@ func BuscaTodosOsProdutos() []Produto {
 			panic(err.Error())
 		}
 
+		p.Id = id
 		p.Nome = nome
 		p.Descricao = descricao
 		p.Preco = preco
@@ -52,17 +53,27 @@ func BuscaTodosOsProdutos() []Produto {
 func CriarProdutoDb(nome, descricao string, preco float64, quantidade int) {
 	db := db.ConectaComBancoDeDados()
 
-	insereDadosNoBanco, err := db.Prepare("INSERT INTO produtos (nome, descricao, preco, quantidade) VALUES ($1, $2, $3, $4)")
+	criarProdutoInstrucao, err := db.Prepare("INSERT INTO produtos (nome, descricao, preco, quantidade) VALUES ($1, $2, $3, $4)")
 
 	if err != nil {
 		log.Println("Erro ao preparar a instrução:", err)
 		panic(err.Error())
 	}
 
-	_, err = insereDadosNoBanco.Exec(nome, descricao, preco, quantidade)
+	_, err = criarProdutoInstrucao.Exec(nome, descricao, preco, quantidade)
 
 	if err != nil {
 		log.Println("Erro ao inserir produto:", err)
 	}
 	defer db.Close()
+}
+
+func DeletarProdutoDb(id string) {
+	db := db.ConectaComBancoDeDados()
+	deletaProdutoInstrucao, err := db.Prepare("DELETE FROM produtos WHERE id=$1")
+	if err != nil {
+		panic(err.Error())
+	}
+	deletaProdutoInstrucao.Exec(id)
+	db.Close()
 }
