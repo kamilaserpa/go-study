@@ -15,7 +15,7 @@ type Produto struct {
 
 func BuscaTodosOsProdutos() []Produto {
 	db := db.ConectaComBancoDeDados()
-	selectDeTodosOsProdutos, err := db.Query("Select * from produtos")
+	selectDeTodosOsProdutos, err := db.Query("Select * from produtos ORDER BY nome asc")
 	if err != nil {
 		log.SetFlags(log.LstdFlags | log.Lshortfile)
 		log.Println("Error querying products:", err)
@@ -96,6 +96,7 @@ func BuscaProdutoDB(id string) Produto {
 		if err != nil {
 			panic(err.Error())
 		}
+		produto.Id = id
 		produto.Nome = nome
 		produto.Descricao = descricao
 		produto.Preco = preco
@@ -104,4 +105,15 @@ func BuscaProdutoDB(id string) Produto {
 
 	defer db.Close()
 	return produto
+}
+
+func AtualizarProdutoDb(id int, nome, descricao string, preco float64, quantidade int) {
+	db := db.ConectaComBancoDeDados()
+	atualizaProdutoInstrucao, err := db.Prepare("UPDATE produtos SET nome=$1, descricao=$2, preco=$3, quantidade=$4 WHERE id=$5")
+	if err != nil {
+		panic(err.Error())
+	}
+	atualizaProdutoInstrucao.Exec(nome, descricao, preco, quantidade, id)
+
+	defer db.Close()
 }

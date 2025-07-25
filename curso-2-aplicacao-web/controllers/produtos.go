@@ -56,3 +56,34 @@ func HandlerEditProduto(w http.ResponseWriter, r *http.Request) {
 	produto := models.BuscaProdutoDB(idDoProduto)
 	templates.ExecuteTemplate(w, "EditProduto", produto)
 }
+
+func UpdateProdutoDb(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "POST" {
+		id := r.FormValue("id")
+		nome := r.FormValue("nome")
+		descricao := r.FormValue("descricao")
+		preco := r.FormValue("preco")
+		quantidade := r.FormValue("quantidade")
+
+		// Converte string para
+		idConvertido, err := strconv.Atoi(id)
+		if err != nil {
+			log.Println("Erro na conversão do ID: ", err)
+			return
+		}
+
+		precoConvertido, err := strconv.ParseFloat(preco, 64)
+		if err != nil {
+			log.Println("Erro na conversão do preco: ", err)
+			return
+		}
+
+		quantidadeConvertida, err := strconv.Atoi(quantidade)
+		if err != nil {
+			log.Println("Erro na conversão da quantidade: ", err)
+			return
+		}
+		models.AtualizarProdutoDb(idConvertido, nome, descricao, precoConvertido, quantidadeConvertida)
+	}
+	http.Redirect(w, r, "/", http.StatusMovedPermanently)
+}

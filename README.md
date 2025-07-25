@@ -28,6 +28,7 @@ Para executar localmente utilizamos o comando `go run main.go` na pasta onde se 
     - [Interface](#interface)
     - [Datas](#datas)
   - [Curso 2 - Go: Aplicação Web](#curso-2---go-aplicação-web)
+    - [Conversão de tipos](#conversão-de-tipos)
 
 
 ### Variáveis
@@ -458,7 +459,8 @@ go get github.com/lib/pq
 ```
 
 No template foi utilizado o formulário  `<form method="POST" action="insert-produto-db">` onde a action está definida numa rota no arquivo [routes](curso-2-aplicacao-web/routes/routes.go): `http.HandleFunc("/insert-produto-db", controllers.InsertDb)`. 
-O controller captura os valores com `request.FormValue()` e executa a função [models/produtos/CriarProdutoDb()](curso-2-aplicacao-web/models/produtos.go) na classe model.
+
+O controller captura os valores com `request.FormValue()` e executa a função [models/produtos/CriarProdutoDb()](curso-2-aplicacao-web/models/produtos.go) na classe model. A classe `model` é que utiliza da linguagem SQL e manipula dados no banco.
 
 É possível adicionar código javascript passando parâmetros e utilizando funções Go. Exemplo no arquivo [curso-2-aplicacao-web/templates/index.html](/curso-2-aplicacao-web/templates/index.html):
 `<button onClick="onDelete('{{.Id}}')" class="btn btn-danger btn-sm">Deletar</button>`.
@@ -481,3 +483,15 @@ func DeletarProdutoDb(id string) {
 
 ![Formulário com buttons de editar e deletar](curso-2-aplicacao-web/assets/form-edit-delete.png)
 
+### Conversão de tipos
+De string para int usamos o pacote `strconv`
+
+```go
+    salario := "1000"
+	salarioInt, err := strconv.Atoi(salario)
+	if err != nil {
+		fmt.Println(err)
+	}
+    salarioString := strconv.Itoa(salarioInt)
+	fmt.Println(salarioString)
+```
