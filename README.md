@@ -458,5 +458,26 @@ go get github.com/lib/pq
 ```
 
 No template foi utilizado o formulário  `<form method="POST" action="insert-produto-db">` onde a action está definida numa rota no arquivo [routes](curso-2-aplicacao-web/routes/routes.go): `http.HandleFunc("/insert-produto-db", controllers.InsertDb)`. 
-O controller captura os valores com `request.FormValue()` e executa a função [CriarProdutoDb](curso-2-aplicacao-web/models/produtos.go) na classe model.
+O controller captura os valores com `request.FormValue()` e executa a função [models/produtos/CriarProdutoDb()](curso-2-aplicacao-web/models/produtos.go) na classe model.
+
+É possível adicionar código javascript passando parâmetros e utilizando funções Go. Exemplo no arquivo [curso-2-aplicacao-web/templates/index.html](/curso-2-aplicacao-web/templates/index.html):
+`<button onClick="onDelete('{{.Id}}')" class="btn btn-danger btn-sm">Deletar</button>`.
+
+<details>
+<summary>Exemplo de função para deletar produto do banco de dados</summary>
+
+```go
+func DeletarProdutoDb(id string) {
+	db := db.ConectaComBancoDeDados()
+	deletaProdutoInstrucao, err := db.Prepare("DELETE FROM produtos WHERE id=$1")
+	if err != nil {
+		panic(err.Error())
+	}
+	deletaProdutoInstrucao.Exec(id)
+	db.Close()
+}
+```
+</details>
+
+![Formulário com buttons de editar e deletar](curso-2-aplicacao-web/assets/form-edit-delete.png)
 

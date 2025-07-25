@@ -4,7 +4,7 @@
 
 <body>
     {{template "_menu"}}
-    
+
     <div class="container">
         <section class="card">
             <div>
@@ -29,6 +29,9 @@
                                 <a href="/delete-produto-db?id={{.Id}}" class="btn btn-danger btn-sm">Excluir</a>
                             </td> -->
                             <td>
+                                <a href="edit?id={{.Id}}" class="btn btn-primary">Editar</a>
+                            </td>
+                            <td>
                                 <button onClick="onDelete('{{.Id}}')" class="btn btn-danger btn-sm">Deletar</button>
                             </td>
                         </tr>
@@ -39,7 +42,7 @@
         </section>
 
         <div class="card-footer">
-            <a href="/novo-produto" class="btn btn-primary mb-2">Adicionar Produto</a>
+            <a href="/novo-produto" class="btn btn-primary mb-2">Criar novo produto</a>
         </div>
     </div>
 </body>

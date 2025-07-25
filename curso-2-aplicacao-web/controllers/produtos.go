@@ -20,6 +20,10 @@ func HandlerProdutoNovo(w http.ResponseWriter, r *http.Request) {
 	templates.ExecuteTemplate(w, "ProdutoNovo", nil)
 }
 
+func HandlerEditProduto(w http.ResponseWriter, r *http.Request) {
+	templates.ExecuteTemplate(w, "EditProduto", nil)
+}
+
 func InsertProdutoDb(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
 		nome := r.FormValue("nome")
