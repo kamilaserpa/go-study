@@ -20,10 +20,6 @@ func HandlerProdutoNovo(w http.ResponseWriter, r *http.Request) {
 	templates.ExecuteTemplate(w, "ProdutoNovo", nil)
 }
 
-func HandlerEditProduto(w http.ResponseWriter, r *http.Request) {
-	templates.ExecuteTemplate(w, "EditProduto", nil)
-}
-
 func InsertProdutoDb(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
 		nome := r.FormValue("nome")
@@ -53,4 +49,10 @@ func DeleteProdutoDb(w http.ResponseWriter, r *http.Request) {
 	idDoProduto := r.URL.Query().Get("id")
 	models.DeletarProdutoDb(idDoProduto)
 	http.Redirect(w, r, "/", http.StatusMovedPermanently)
+}
+
+func HandlerEditProduto(w http.ResponseWriter, r *http.Request) {
+	idDoProduto := r.URL.Query().Get("id")
+	produto := models.BuscaProdutoDB(idDoProduto)
+	templates.ExecuteTemplate(w, "EditProduto", produto)
 }
