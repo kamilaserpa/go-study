@@ -2,7 +2,7 @@
 
 Documentação: https://go.dev/ref/spec . </br>
 Go playground: https://go.dev/play/ .</br>
-Para executar localmente utilizamos o comando `go run main.go` na pasta onde se encontra o arquivo `main.go`.
+Para executar localmente utilizamos o comando `go run main.go` na pasta onde se encontra o arquivo `main.go`. Assim podemos acessar a aplicação no navegador: `http://localhost:8000/`.
 
 <img src="curso-1-orientacao-objeto/assets/image-logo-alura-go.png" alt="Imagem do Gopher e texto Alura no topo" width="150"/>
 
@@ -428,7 +428,7 @@ Mon, 02 Jan 2006
 ## Curso 2 - Go: Aplicação Web
 
 Para criar o servidor e conseguir exibir uma página html, no arquivo `main.go` foram utilizadas as funções HandleFunc e ListenAndServe do pacote `net/http`.
-No arquivo `index.html`foi definido entre 2 chaves {{ }} a referência passada na função `ExecuteTemplate` ([main.go](curso-2-aplicacao-web/main.go)).
+No arquivo `index.html` foi definido entre 2 chaves {{ }} a referência passada na função `ExecuteTemplate` ([main.go](curso-2-aplicacao-web/main.go)).
 
 Criamos um banco de dados Postgresql local e com o PgAdmin criamos as tabelas.
 
@@ -455,5 +455,8 @@ Para conectar com o banco de dados acessamos o site `https://godoc.org/`, pesqui
 go mod init
 go mod tidy
 go get github.com/lib/pq
-````
+```
+
+No template foi utilizado o formulário  `<form method="POST" action="insert-produto-db">` onde a action está definida numa rota no arquivo [routes](curso-2-aplicacao-web/routes/routes.go): `http.HandleFunc("/insert-produto-db", controllers.InsertDb)`. 
+O controller captura os valores com `request.FormValue()` e executa a função [CriarProdutoDb](curso-2-aplicacao-web/models/produtos.go) na classe model.
 

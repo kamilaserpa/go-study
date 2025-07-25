@@ -7,5 +7,6 @@ import (
 
 func CarregaRotas() {
 	http.HandleFunc("/", controllers.HandlerIndex)
-	http.HandleFunc("/produtos/novo", controllers.HandlerProdutoNovo)
+	http.HandleFunc("/novo-produto", controllers.HandlerProdutoNovo)
+	http.HandleFunc("/insert-produto-db", controllers.InsertDb)
 }
