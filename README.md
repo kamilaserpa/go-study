@@ -4,6 +4,8 @@ Documentação: https://go.dev/ref/spec . </br>
 Go playground: https://go.dev/play/ .</br>
 Para executar localmente utilizamos o comando `go run main.go` na pasta onde se encontra o arquivo `main.go`. Assim podemos acessar a aplicação no navegador: `http://localhost:8000/`.
 
+Extensão recomendada para VS Code: https://marketplace.visualstudio.com/items?itemName=golang.go 
+
 <img src="curso-1-orientacao-objeto/assets/image-logo-alura-go.png" alt="Imagem do Gopher e texto Alura no topo" width="150"/>
 
 ## Curso 1 - Go: Orientação a Objetos
@@ -29,7 +31,9 @@ Para executar localmente utilizamos o comando `go run main.go` na pasta onde se 
     - [Datas](#datas)
   - [Curso 2 - Go: Aplicação Web](#curso-2---go-aplicação-web)
     - [Conversão de tipos](#conversão-de-tipos)
+  - [Curso 3 - Go: desenvolvendo uma API Rest](#curso-3---go-desenvolvendo-uma-api-rest)
 
+O projeto deve estar localizado no go path: `/Users/<username>/go/src/`.
 
 ### Variáveis
 
@@ -495,3 +499,12 @@ De string para int usamos o pacote `strconv`
     salarioString := strconv.Itoa(salarioInt)
 	fmt.Println(salarioString)
 ```
+
+## Curso 3 - Go: desenvolvendo uma API Rest
+
+Até então criamos os nossos projetos no diretório na go path(`/Users/<username>/go/src/`). Iremos criar o nosso projeto em qualquer pasta do computador. No terminal da pasta do projeto executamos `go mod init <description>`. Geralmente coloca-se o link do git-hub do repositório do projeto, por exemplo:
+
+> go mod init github.com/kamilaserpa/go-study
+
+Iremos utilizar um ORM (Object-Relational Mapping) é uma técnica de programação que permite que você interaja com um banco de dados usando a linguagem de programação que você está utilizando (no nosso caso, Go) de uma forma mais intuitiva, como se estivesse trabalhando diretamente com objetos.
+Por exemplo, ao escrever `produto := orm.Find(Produto, 1)` o ORM se encarrega de gerar a consulta SQL correspondente (`SELECT * FROM produtos WHERE id = 1`).
