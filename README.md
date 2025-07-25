@@ -505,6 +505,17 @@ De string para int usamos o pacote `strconv`
 Até então criamos os nossos projetos no diretório na go path(`/Users/<username>/go/src/`). Iremos criar o nosso projeto em qualquer pasta do computador. No terminal da pasta do projeto executamos `go mod init <description>`. Geralmente coloca-se o link do git-hub do repositório do projeto, por exemplo:
 
 > go mod init github.com/kamilaserpa/go-study
+> go mod tidy
 
 Iremos utilizar um ORM (Object-Relational Mapping) é uma técnica de programação que permite que você interaja com um banco de dados usando a linguagem de programação que você está utilizando (no nosso caso, Go) de uma forma mais intuitiva, como se estivesse trabalhando diretamente com objetos.
 Por exemplo, ao escrever `produto := orm.Find(Produto, 1)` o ORM se encarrega de gerar a consulta SQL correspondente (`SELECT * FROM produtos WHERE id = 1`).
+
+Utilizamos a descrição `json:"<nome-para-serializacao>"` para descrever como o atributo será serializado para o formato json:
+```go
+    type Personalidade struct {
+        ID        int    `json:"id"`
+        Nome      string `json:"nome"`
+        Historia  string `json:"historia"`
+    }
+```
+
