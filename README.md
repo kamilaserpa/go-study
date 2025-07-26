@@ -34,6 +34,7 @@ Extensão recomendada para VS Code: https://marketplace.visualstudio.com/items?i
   - [Curso 3 - Go: desenvolvendo uma API Rest](#curso-3---go-desenvolvendo-uma-api-rest)
     - [Roteador de requisições](#roteador-de-requisições)
     - [Docker e Postgres](#docker-e-postgres)
+    - [ORM gorm](#orm-gorm)
 
 O projeto deve estar localizado no go path: `/Users/<username>/go/src/`.
 
@@ -569,3 +570,12 @@ Na aba "Connection" em hostname adicionamos a porta local que está sendo utiliz
 
 Em PgAdmin> Schemas> Public> Tables > View data podemos visualizar os dados inseridos no Postgres.
 ![alt text](curso-3-api-rest/pgadmin-inserindo-dados.png)
+
+### ORM gorm
+
+Instalamos o gorm pelas instruções da página https://gorm.io/, Connecting to Database e Existing database connection, `go get gorm.io/driver/postgres`. Preenchemos os dados no arquivo de conexão [database/db.go](curso-3-api-rest/database/db.go):
+
+```go
+dsn := "user=root password=root dbname=root host=localhost port=5432 sslmode=disable"
+db, err := gorm.Open(gaussdb.Open(dsn), &gorm.Config{})
+```

@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 
+	"github.com/kamilaserpa/go-study/database"
 	"github.com/kamilaserpa/go-study/models"
 	"github.com/kamilaserpa/go-study/routes"
 )
@@ -20,7 +21,7 @@ func main() {
 			Historia: "Pioneira na pesquisa sobre radioatividade.",
 		},
 	}
-
+	database.ConnectaComBancoDeDados()
 	fmt.Println("Iniciando o servidor Rest com Go!")
 	routes.HandleRequest()
 }
