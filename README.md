@@ -33,6 +33,7 @@ Extensão recomendada para VS Code: https://marketplace.visualstudio.com/items?i
     - [Conversão de tipos](#conversão-de-tipos)
   - [Curso 3 - Go: desenvolvendo uma API Rest](#curso-3---go-desenvolvendo-uma-api-rest)
     - [Roteador de requisições](#roteador-de-requisições)
+    - [Docker e Postgres](#docker-e-postgres)
 
 O projeto deve estar localizado no go path: `/Users/<username>/go/src/`.
 
@@ -536,6 +537,8 @@ Em [routes]() criamos a rota usando o `mux`:
 	id := vars["id"]
 ```
 
+### Docker e Postgres
+
 Para o banco de dados vamos usar o Docker, segundo o arquivo [docker-compose.yml](curso-3-api-rest/docker-compose.yml). Criamos a tabela com o código sql do arquivo [docker-database-initial.sql](curso-3-api-rest/migration/docker-database-initial.sql)
 
 <details>
@@ -557,3 +560,12 @@ Para o banco de dados vamos usar o Docker, segundo o arquivo [docker-compose.yml
 
 Adicionado o arquivo docker-compose.yml executamos `docker-compose up`.
 Em seguida podemos acessar o PgAdmin em `http://localhost:54321/` e fazemos login com os dados de admin e senha que estão no docker-compose.
+
+No PgAdmin no navegador, acessamos a aba "Servers" clicamos com o lado direito, "Register" > "Server".
+Na aba "Connection" em hostname adicionamos a porta local que está sendo utilizada pelo docker. Para identificar essa porta executamos:
+`docker-compose exec postgres sh` e em seguida, no terminal integrado, executamos `hostname -i` e será exibida a porta em que o postman está sendo executado.
+
+![Identifica porta em que um serviço docker está sendo executado](curso-3-api-rest/porta-da-aplicacao-docker.png)
+
+Em PgAdmin> Schemas> Public> Tables > View data podemos visualizar os dados inseridos no Postgres.
+![alt text](curso-3-api-rest/pgadmin-inserindo-dados.png)
