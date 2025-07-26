@@ -32,6 +32,7 @@ Extensão recomendada para VS Code: https://marketplace.visualstudio.com/items?i
   - [Curso 2 - Go: Aplicação Web](#curso-2---go-aplicação-web)
     - [Conversão de tipos](#conversão-de-tipos)
   - [Curso 3 - Go: desenvolvendo uma API Rest](#curso-3---go-desenvolvendo-uma-api-rest)
+    - [Roteador de requisições](#roteador-de-requisições)
 
 O projeto deve estar localizado no go path: `/Users/<username>/go/src/`.
 
@@ -519,3 +520,40 @@ Utilizamos a descrição `json:"<nome-para-serializacao>"` para descrever como o
     }
 ```
 
+### Roteador de requisições
+Foi utilizada a biblioteca gorila/mux: https://github.com/gorilla/mux.
+Adicionamos no projeto com: `go get -u github.com/gorilla/mux`. 
+
+> O nome mux significa "multiplexador de requisições HTTP". Assim como o padrão http.ServeMux, mux.Routerele compara as requisições recebidas com uma lista de rotas registradas e chama um manipulador para a rota que corresponde à URL ou a outras condições.
+
+Em [routes]() criamos a rota usando o `mux`:
+```go
+    r := mux.NewRouter()
+	r.HandleFunc("/api/personalidades/{id}", controllers.GetPersonalidadePorId).Methods("GET")
+
+    // No controller capturamos o path param
+    vars := mux.Vars(r)
+	id := vars["id"]
+```
+
+Para o banco de dados vamos usar o Docker, segundo o arquivo [docker-compose.yml](curso-3-api-rest/docker-compose.yml). Criamos a tabela com o código sql do arquivo [docker-database-initial.sql](curso-3-api-rest/migration/docker-database-initial.sql)
+
+<details>
+<summary>Código SQL de criação da tabela</summary>
+
+```sql
+    create table personalidades(
+        id serial primary key,
+        nome varchar,
+        historia varchar
+    );
+    -- Inserindo dados
+      INSERT INTO personalidades(nome, historia) VALUES
+    ('José de Alencar', 'Romancista, dramaturgo e político, autor de "O Guarani" e "Iracema'),
+    ('Fagner', 'Cantor e compositor, conhecido por sua música regional e romântica.'),
+    ('Rachel de Queiroz', 'Rachel de Queiroz foi uma escritora pioneira no cenário literário brasileiro. Ela foi a primeira mulher a ser eleita para a Academia Brasileira de Letras.');
+```
+</details>
+
+Adicionado o arquivo docker-compose.yml executamos `docker-compose up`.
+Em seguida podemos acessar o PgAdmin em `http://localhost:54321/` e fazemos login com os dados de admin e senha que estão no docker-compose.
