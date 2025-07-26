@@ -35,6 +35,7 @@ Extensão recomendada para VS Code: https://marketplace.visualstudio.com/items?i
     - [Roteador de requisições](#roteador-de-requisições)
     - [Docker e Postgres](#docker-e-postgres)
     - [ORM gorm](#orm-gorm)
+      - [Busca de personalidades](#busca-de-personalidades)
 
 O projeto deve estar localizado no go path: `/Users/<username>/go/src/`.
 
@@ -579,3 +580,14 @@ Instalamos o gorm pelas instruções da página https://gorm.io/, Connecting to 
 dsn := "user=root password=root dbname=root host=localhost port=5432 sslmode=disable"
 db, err := gorm.Open(gaussdb.Open(dsn), &gorm.Config{})
 ```
+
+#### Busca de personalidades
+podemos acessar os dados do banco na URL `http://localhost:8000/api/personalidades`
+```go
+    var p []models.Personalidade
+    database.DB.Find(&p) // onde DB é *gorm.DB, busca a lsita de todas as personalidades
+    //----
+    var p models.Personalidade
+	database.DB.First(&p, id) // busca a primeira personalidade com o id definido
+```
+
