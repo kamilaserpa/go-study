@@ -561,10 +561,12 @@ Para o banco de dados vamos usar o Docker, segundo o arquivo [docker-compose.yml
 </details>
 
 Adicionado o arquivo docker-compose.yml executamos `docker-compose up`.
+
 Em seguida podemos acessar o PgAdmin em `http://localhost:54321/` e fazemos login com os dados de admin e senha que estão no docker-compose.
 
 No PgAdmin no navegador, acessamos a aba "Servers" clicamos com o lado direito, "Register" > "Server".
-Na aba "Connection" em hostname adicionamos a porta local que está sendo utilizada pelo docker. Para identificar essa porta executamos:
+Na aba "Connection" em hostname adicionamos a porta local que está sendo utilizada pelo docker. 
+Para identificar essa porta executamos:
 `docker-compose exec postgres sh` e em seguida, no terminal integrado, executamos `hostname -i` e será exibida a porta em que o postman está sendo executado.
 
 ![Identifica porta em que um serviço docker está sendo executado](curso-3-api-rest/porta-da-aplicacao-docker.png)
