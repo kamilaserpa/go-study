@@ -29,3 +29,10 @@ func GetPersonalidadePorId(w http.ResponseWriter, r *http.Request) {
 	database.DB.First(&p, id)
 	json.NewEncoder(w).Encode(p)
 }
+
+func CriaNovaPersonalidade(w http.ResponseWriter, r *http.Request) {
+	var personalidade models.Personalidade
+	json.NewDecoder(r.Body).Decode(&personalidade)
+	database.DB.Create(&personalidade)
+	json.NewEncoder(w).Encode(personalidade)
+}

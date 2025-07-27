@@ -14,5 +14,6 @@ func HandleRequest() {
 	r.HandleFunc("/", controllers.Home)
 	r.HandleFunc("/api/personalidades", controllers.TodasPersonalidades).Methods("GET")
 	r.HandleFunc("/api/personalidades/{id}", controllers.GetPersonalidadePorId).Methods("GET")
+	r.HandleFunc("/api/personalidades", controllers.CriaNovaPersonalidade).Methods("POST")
 	log.Fatal(http.ListenAndServe(":8000", r)) // Qualquer problema na inicialização será logado
 }
