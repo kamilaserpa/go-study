@@ -35,7 +35,7 @@ Extensão recomendada para VS Code: https://marketplace.visualstudio.com/items?i
     - [Roteador de requisições](#roteador-de-requisições)
     - [Docker e Postgres](#docker-e-postgres)
     - [ORM gorm](#orm-gorm)
-      - [Busca de personalidades](#busca-de-personalidades)
+      - [Acessando personalidades do Banco de dados](#acessando-personalidades-do-banco-de-dados)
 
 O projeto deve estar localizado no go path: `/Users/<username>/go/src/`.
 
@@ -581,13 +581,19 @@ dsn := "user=root password=root dbname=root host=localhost port=5432 sslmode=dis
 db, err := gorm.Open(gaussdb.Open(dsn), &gorm.Config{})
 ```
 
-#### Busca de personalidades
-podemos acessar os dados do banco na URL `http://localhost:8000/api/personalidades`
+#### Acessando personalidades do Banco de dados
+
+Podemos acessar os dados do banco na URL `http://localhost:8000/api/personalidades`. As queries estão no [controller](/Users/kamilaserpa/go/src/alura/curso-3-api-rest/controllers/controllers.go):
 ```go
     var p []models.Personalidade
-    database.DB.Find(&p) // onde DB é *gorm.DB, busca a lsita de todas as personalidades
+    database.DB.Find(&p) // onde DB é *gorm.DB, busca a lista de todas as personalidades
     //----
     var p models.Personalidade
 	database.DB.First(&p, id) // busca a primeira personalidade com o id definido
+
+    database.DB.Create(&personalidade) // cria personalidade
+
+    database.DB.Delete(&personalidade, id) // deleta personalidade com o id definido
 ```
 
+Página de documentação do Gorm com exemplos de queries: https://gorm.io/docs/query.html.
