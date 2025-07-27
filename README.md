@@ -36,6 +36,8 @@ Extensão recomendada para VS Code: https://marketplace.visualstudio.com/items?i
     - [Docker e Postgres](#docker-e-postgres)
     - [ORM gorm](#orm-gorm)
       - [Acessando personalidades do Banco de dados](#acessando-personalidades-do-banco-de-dados)
+    - [Integração com front-end](#integração-com-front-end)
+      - [CORS](#cors)
 
 O projeto deve estar localizado no go path: `/Users/<username>/go/src/`.
 
@@ -508,7 +510,7 @@ De string para int usamos o pacote `strconv`
 
 Até então criamos os nossos projetos no diretório na go path(`/Users/<username>/go/src/`). Iremos criar o nosso projeto em qualquer pasta do computador. No terminal da pasta do projeto executamos `go mod init <description>`. Geralmente coloca-se o link do git-hub do repositório do projeto, por exemplo:
 
-> go mod init github.com/kamilaserpa/go-study
+> go mod init github.com/kamilaserpa/go-study <br>
 > go mod tidy
 
 Iremos utilizar um ORM (Object-Relational Mapping) é uma técnica de programação que permite que você interaja com um banco de dados usando a linguagem de programação que você está utilizando (no nosso caso, Go) de uma forma mais intuitiva, como se estivesse trabalhando diretamente com objetos.
@@ -599,3 +601,22 @@ Podemos acessar os dados do banco na URL `http://localhost:8000/api/personalidad
 ```
 
 Página de documentação do Gorm com exemplos de queries: https://gorm.io/docs/query.html.
+
+### Integração com front-end
+
+Executamos a aplicação front-end em React na pasta [curso-3-api-rest/frontend-react-personalidades-master](curso-3-api-rest/frontend-react-personalidades-master) para realizar as requisições para a API go do curso 3. Ela será executada no endereço `http://localhost:3000`.
+
+<details>
+<summary>Passos para executar a aplicação front-end, na pasta do projeto React</summary>
+
+> npm install <br>
+> npm update <br>
+> npm start
+</details>
+
+#### CORS
+Inicialmente recebemos o erro de [Cors](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS), pois a porta da aplicação Front-end é diferente da API, está em outra origem ([Same origin policy documentation](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy)):
+> Access to XMLHttpRequest at 'http://localhost:8000/api/personalidades' from origin 'http://localhost:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+
+Para adicionar essa permissão na API Go usaremos a biblioteca https://github.com/gorilla/handlers com `go get github.com/gorilla/handlers`. E adicionamos em routes a configuração:
+`http.ListenAndServe(":8000", handlers.CORS(handlers.AllowedOrigins([]string{"*"}))(r))`.

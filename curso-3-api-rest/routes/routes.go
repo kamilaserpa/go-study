@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 
 	"github.com/kamilaserpa/go-study/controllers"
@@ -21,5 +22,5 @@ func HandleRequest() {
 	r.HandleFunc("/api/personalidades/{id}", controllers.DeletaPersonalidade).Methods("DELETE")
 	r.HandleFunc("/api/personalidades/{id}", controllers.EditaPersonalidade).Methods("PUT")
 
-	log.Fatal(http.ListenAndServe(":8000", r)) // Qualquer problema na inicialização será logado
+	log.Fatal(http.ListenAndServe(":8000", handlers.CORS(handlers.AllowedOrigins([]string{"*"}))(r))) // log - Qualquer problema na inicialização será logado
 }
